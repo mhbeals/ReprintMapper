@@ -243,6 +243,7 @@ void GenerateComparisonDatabase()
 				}
 			}
 		}
+
 		else if (A_Month > B_Month || A_Month == B_Month && A_Day > B_Day) //if they are the same year and the target month is later than the source month, or they are the same month and the target day is later than the source day
 		{
 			int A_Days = MonthToDays(A_Month, IsLeap(A_Year)) + A_Day; //calculate days in target year so far
@@ -355,28 +356,29 @@ void ProcessSelectedComparisons() //Map Reprints
 						bIsEarliest = false; //allows it to keep searching for better matches
 						year = Comparisons[it2].B.Year; // set source year as year
 						month = Comparisons[it2].B.Month; //set source month as month
-						day = Comparisons[it2].B.Day; //set source day as day					}
+						day = Comparisons[it2].B.Day; //set source day as day
 					}
 				}
-			} //after going through whole list
-			if (BestMatch == "") //if there was no best match
-			{
-				bIsEarliest = true; //label target as earliest
 			}
-			if (bIsEarliest) //if target is labeled as earliest 
-			{
-				UniqueArticle[it].bIsTrash = true; //label as trash
-				UniqueArticle[it].TargetUID = BestMatch;
-				UniqueArticle[it].bIsOriginal = bIsEarliest;
-			}
-			else //if target is not labeled as earliest
-			{
-				UniqueArticle[it].TargetUID = BestMatch;
-				UniqueArticle[it].bIsOriginal = bIsEarliest;
-			}
+		}
+		if (BestMatch == "") //if there was no best match
+		{
+			bIsEarliest = true; //label target as earliest
+		}
+		if (bIsEarliest) //if target is labeled as earliest 
+		{
+			UniqueArticle[it].bIsTrash = true; //label as trash
+			UniqueArticle[it].TargetUID = BestMatch;
+			UniqueArticle[it].bIsOriginal = bIsEarliest;
+		}
+		else //if target is not labeled as earliest
+		{
+			UniqueArticle[it].TargetUID = BestMatch;
+			UniqueArticle[it].bIsOriginal = bIsEarliest;
 		}
 	}
 }
+
 void WriteOutputFile()
 {
 	string data = "";
