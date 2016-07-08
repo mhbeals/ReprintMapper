@@ -24,5 +24,4 @@ Example inputs are available at [https://github.com/mhbeals/BL19thC_Reprints/tre
 
 ### Use
 
-Core programme file (ReprintMapper_v_0_2_1.cpp) should be modified to indicate path to input file and desired output folder. 
-Compile or run from debug window.
+Run release candidate on Windows or open source in Visual Studio.
