@@ -64,7 +64,7 @@ struct Results //final manifest
 	string UID; //unique id of target article
 	string TargetUID; //unique id of source article
 	bool bIsOriginal; //boolean indicating a successful source
-	bool bIsTrash; //boolean indicating a dead-end source
+	bool bIsDeadEnd; //boolean indicating a dead-end source
 };
 
 vector<Comparison> Comparisons; //vector for comparison calculations
@@ -162,7 +162,7 @@ void GenerateComparisonDatabase()
 	string location = "C:\\users\\username\\Desktop\\manifest.txt"; //set arbitrary input location
 	cout << "Your current input file is: " << location << endl; 
 	cout << "What is your actual input file? ";
-	getline(cin, location); //set correction input location
+	getline(cin, location); //set correct input location
 
 	ifstream Data(location); //load manifest and populate comparison database
 
@@ -371,7 +371,7 @@ void ProcessSelectedComparisons() //Map Reprints
 		}
 		if (bIsEarliest) //if target is labeled as earliest 
 		{
-			UniqueArticle[it].bIsTrash = true; //label as trash
+			UniqueArticle[it].bIsDeadEnd = true; //label as DeadEnd
 			UniqueArticle[it].TargetUID = BestMatch;
 			UniqueArticle[it].bIsOriginal = bIsEarliest;
 		}
@@ -388,14 +388,14 @@ void WriteOutputFile()
 	string outputRM = "C:\\users\\username\\Desktop\\reprintmap.csv"; //set arbitrary output location
 	cout << "Your current reprint map (output) file is: " << outputRM << endl;
 	cout << "What is your preferred reprint map (output) file? ";
-	getline(cin, outputRM); //set correction output location
+	getline(cin, outputRM); //set correct output location
 	
 	string data = "";
 
 	ofstream file(outputRM); //print ancestor-descendent pairs into file
 	for (unsigned int i = 0; i < size(UniqueArticle); ++i)
 	{
-		if (!UniqueArticle[i].bIsTrash)
+		if (!UniqueArticle[i].bIsDeadEnd)
 			data = data + UniqueArticle[i].UID + "," + UniqueArticle[i].TargetUID + "\n";
 	}
 	file << data;
@@ -408,22 +408,22 @@ void WriteRecieverFile()
 	string outputED = "C:\\users\\username\\Desktop\\deadendlist.csv"; //set arbitrary output location
 	cout << "Your current list of evolutionary dead-ends (output) file is: " << outputED << endl;
 	cout << "What is your preferred list of evolutionary dead-ends (output) file? ";
-	getline(cin, outputED); //set correction output location
+	getline(cin, outputED); //set correct output location
 	
 	string data = "";
 
 	ofstream file(outputED); //print list of evolutionary dead-ends
 	for (unsigned int i = 0; i < size(UniqueArticle); ++i)
 	{
-		if (UniqueArticle[i].bIsTrash)
+		if (UniqueArticle[i].bIsDeadEnd)
 			data = data + UniqueArticle[i].UID + "," + UniqueArticle[i].TargetUID + "\n";
 	}
 	file << data;
 	return;
 }
 
-
-void WriteComparisonTable()
+/*For Diagnostics Only
+void WriteComparisonTable() 
 {
 	string data = "";
 	ofstream file("C:\\users\\username\\Desktop\\RawComparisonTable.csv"); //print raw comparison table
@@ -434,7 +434,7 @@ void WriteComparisonTable()
 	}
 	file << data;
 	return;
-}
+}*/
 
 int main() //provide user feedback
 {
@@ -453,7 +453,9 @@ int main() //provide user feedback
 	cout << "Writing Reciever File..." << endl;
 	WriteRecieverFile();
 	cout << "Finished." << endl << endl;
-
+	
+	// WriteComparisonTable() //for diagnostics only
+	
 	cout << "The Comparisons vector has " << size(Comparisons) << " elements." << endl << endl;
 	cout << "The Unique article vector has " << size(UniqueArticle) << " elements." << endl << endl;
 	cout << "We have processed " << NumLines << " lines of raw data from the input file." << endl << endl;
