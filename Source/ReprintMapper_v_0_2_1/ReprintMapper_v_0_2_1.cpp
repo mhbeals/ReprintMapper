@@ -1,10 +1,10 @@
 // Reprint Mapper v.0.2
-// John Christian Wood and Username (2016) ReprintMapper v.0.2. [Software]
+// John Christian Wood and M. H. Beals (2016) ReprintMapper v.0.2. [Software]
 // Available at https://github.com/mhbeals/ReprintMapper
 
 // MIT License
 
-// Copyright(c) 2016 John Christian Wood and M.H.Beals
+// Copyright(c) 2016 John Christian Wood and M. H. Beals
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files(the "Software"), to deal
