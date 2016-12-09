@@ -1,7 +1,7 @@
 # ReprintMapper
-## Version: 0.2.1
+## Version: 1.0.0
 
-A programme to convert Copyfind outputs into a list of direct ancestor-descendent matches; part of the [Scissors and Paste Project]( https://osf.io/nm2rq/)
+A programme to convert Copyfind outputs into a list of direct ancestor-descendent matches; part of the [Scissors and Paste Project](https://osf.io/nm2rq/)
 
 ### Input
 
@@ -25,3 +25,7 @@ Example inputs are available at [https://github.com/mhbeals/BL19thC_Reprints/tre
 ### Use
 
 Run release candidate on Windows or open source in Visual Studio.
+
+or
+
+Use script and batch file creator (python) to run a sequence of files
